@@ -1,15 +1,20 @@
-FROM python:3.7.3-alpine
+FROM python:3.7-slim-stretch
 ENV PYTHONUNBUFFERED 1
 
-RUN apk update && apk add --virtual .build-deps gcc libc-dev linux-headers make musl-dev pcre-dev netcat-openbsd
-RUN pip install pipenv 
+# RUN apk update && apk add --virtual .build-deps gcc libc-dev linux-headers make musl-dev pcre-dev netcat-openbsd
+RUN apt update
+RUN apt install -y python3-dev gcc
 
 WORKDIR /usr/src/app
 
-COPY Pipfile Pipfile.lock ./
-RUN pipenv install --system --deploy
+RUN pip install torch_nightly -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html
+RUN pip install fastai
 
-COPY . /usr/src/app
+# Install starlette and uvicorn
+RUN pip install starlette uvicorn python-multipart aiohttp
+
+COPY eth_gen.py eth_gen.py
+COPY export.pkl export.pkl
 
 EXPOSE 8008
 
