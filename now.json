@@ -1,4 +1,10 @@
 {
     "name": "gender-ethnicity",
-    "version": 2
+    "version": 2,
+    "builds": [
+        {
+            "src": "**/*.py",
+            "use": "@now/python"
+        }
+    ]
 }
