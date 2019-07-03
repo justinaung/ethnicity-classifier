@@ -1,11 +1,5 @@
 {
-    "name": "gender-ethnicity",
-    "version": 1,
-    "builds": [
-        {
-            "src": "**/*.py",
-            "use": "@now/python",
-            "config": { "maxLambdaSize": "100mb"}
-        }
-    ]
+    "features": {
+        "cloud": "v2"
+    }
 }
