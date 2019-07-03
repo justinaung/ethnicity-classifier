@@ -36,7 +36,7 @@ async def classify_url(request):
 
 def predict_image_from_data_file(data_file):
     img = open_image(BytesIO(data_file))
-    losses = img.predict(learner)
+    _, _, losses = learner.predict(img)
     return JSONResponse({
         'predictions': sorted(
             zip(learner.data.classes, map(float, losses)),
@@ -70,5 +70,5 @@ def redirect_to_homepage(request):
 
 
 if __name__ == '__main__':
-    if 'server' in sys.argv:
+    if 'serve' in sys.argv:
         uvicorn.run(app, host='0.0.0.0', port=8008)

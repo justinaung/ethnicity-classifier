@@ -11,6 +11,7 @@ fastai = "*"
 starlette = "*"
 uvicorn = "*"
 aiohttp = "*"
+python-multipart = "*"
 
 [requires]
 python_version = "3.7"
